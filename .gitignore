@@ -1,0 +1,8 @@
+MNIST/data/MNIST/raw/t10k-images-idx3-ubyte
+*.csv
+MNIST/data/MNIST/raw/t10k-images-idx3-ubyte.gz
+*-ubyte
+*.gz
+*.png 
+*.pkl 
+
