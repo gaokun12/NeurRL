@@ -386,12 +386,12 @@ class EndToEndTimeSeries(TimeSeries):
         # self.test_rule()
         if self.best_acc_test > best_acc_plot_test and self.test_flag == True:
             print('ploting becuase acc is improved')
-            self.interpret_rules(logic_model,cg)
+            rule_obj = self.interpret_rules(logic_model,cg)
             best_acc_plot_test = self.best_acc_test
             
         if best_acc_train > best_acc_plot_train and self.test_flag == False:
             print('ploting becuase acc is improved')
-            self.interpret_rules(logic_model,cg)
+            rule_obj = self.interpret_rules(logic_model,cg)
             best_acc_plot_train = best_acc_train
             
         if best_acc_plot_test == 1 and self.test_flag == True:
@@ -408,7 +408,7 @@ class EndToEndTimeSeries(TimeSeries):
         #     f.write('acc neural test',str(self.best_acc_test))
         #     f.close()
         
-        return self.best_acc_test
+        return self.best_acc_test, rule_obj
         
         
     def run_ae(self, dataload, optimizer, ae_model, mse, writer):
@@ -1033,14 +1033,16 @@ def main(task = 'binary', append_info='',device = ''):
     def UCR_binary(device, append_info):
         # UCR binary data 
         random_seed = [1,100,1231]
+        accs = []
+        acc_rules = []
         for single_seed in random_seed:
             # torch.manual_seed(single_seed)
             # np.random.seed(single_seed)
             # todo_task = get_all_unsovled_task()
             # for task in todo_task:
             todo_task = get_all_task()
-            # focused_task = ['Distal','Earth','ECG','Gun_Point','Ham','Hand']
-            focused_task = ['Italy']
+            # focused_task = ['Distal','Earth','ECG','GunPoint','Ham','Hand']
+            focused_task = ['ECG']
             for task in todo_task:
                 for subtask in focused_task:
                     if subtask in task:
@@ -1064,13 +1066,19 @@ def main(task = 'binary', append_info='',device = ''):
                 rule_learning_method = 'DFORL_endtoend'
                 current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 result_name = os.path.join(father_path, 'res/' + task_name + f'_{rule_learning_method}')    
+                print('n_cluster',specs.n_clusters, 'period', specs.period_length, 'sequence', specs.subsequence_length)
                 ts = EndToEndTimeSeries(rule_learning_method= rule_learning_method ,train_data_path=train_data_path, test_data_path=test_data_path, result_name=result_name, task_name = task_name, father_path=father_path, unit = 1, low=None, high=None, max_plot=50, min_precision=0.1, min_recall=0.8, max_inter=10, n_clustering=specs.n_clusters, model_type='time_period', device=device, test_flag=test_flag)
-                ts.run_loop()
+                s_acc, rule_obj = ts.run_loop()
+                accs.append(s_acc)
+                acc_rules.append(rule_obj['metrics']['acc'])
                 end_time = datetime.now()
                 running_time = end_time - start_time
                 with open('time_deeprl.md','a+') as f:
                     print('Task:',task, 'RTime:',running_time, file=f)
                 add_task_to_solved_folder(task)
+                print(accs)
+                print(acc_rules)
+        return accs, acc_rules
     
     def UCR_mul(device, append_info):
         # UCR multivariable data 
@@ -1160,11 +1168,12 @@ def main(task = 'binary', append_info='',device = ''):
     specs.data = task
     father_path = 'rule_learning_original'  
     specs.main()
+    return_acc = []
     print(colored(f'Device {device} Task {task}', 'red'))
     if task == 'demo':
         demo(device, append_info)
     elif task == 'UCR_binary':
-        UCR_binary(device, append_info)
+        return_acc = UCR_binary(device, append_info)
     elif task == 'UCR_mul':
         UCR_mul(device, append_info)
     elif  task == 'image':
@@ -1172,6 +1181,7 @@ def main(task = 'binary', append_info='',device = ''):
     else:
         raise ValueError('Task not found')
     
+    return return_acc
     # setting for multivariable data     
     # # todo_task = get_all_unsovled_task(binary=False)
     # todo_task = get_all_task(binary=False)
@@ -1209,7 +1219,7 @@ def main(task = 'binary', append_info='',device = ''):
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument('-t','--task', type=str, default='b')
+    parser.add_argument('-t','--task', type=str, default='ablation')
     parser.add_argument('-a','--append_data_info', type=str, default='')
     parser.add_argument('-d','--device', type=str, default='cuda:0')
     args = parser.parse_args()
@@ -1226,3 +1236,59 @@ if __name__ == "__main__":
         # append_info = ['p1nrest','p2nrest','p3nrest','p4nrest','p5nrest']
         for i in append_info:
             main('image', append_info=i, device = args.device)
+
+    elif args.task == 'abl_c':
+        best_clustering = 4
+        best_period = 3
+        best_subsequence = 5
+        all_clustering = [2,3,4,5,6]
+        all_period = [2,3,4,5,6]
+        all_subsequence = [3,4,5,6,7]
+        # for clsutering 
+        c_resutls = []
+        p_results = []
+        s_results = []
+        for c in all_clustering:
+            specs.n_clusters = c
+            print(specs.n_clusters)
+            acc_neu, acc_rules = main('UCR_binary', append_info=args.append_data_info, device = args.device)
+            print(acc_neu)
+            print(acc_rules)
+            c_resutls.append((acc_neu,acc_rules))
+            print(c_resutls)
+        with open('clustering_results_ablation.md','a+') as f:
+            print(c_resutls, file=f)
+            
+    elif args.task == 'abl_p':
+        all_period = [2,3,4,5,6]
+        # for clsutering 
+        c_resutls = []
+        p_results = []
+        s_results = []
+        for c in all_period:
+            specs.period_length = c
+            print(specs.period_length)
+            acc_neu, acc_rules = main('UCR_binary', append_info=args.append_data_info, device = args.device)
+            print(acc_neu)
+            print(acc_rules)
+            c_resutls.append((acc_neu,acc_rules))
+            print(c_resutls)
+        with open('period_results_ablation.md','a+') as f:
+            print(c_resutls, file=f)
+    
+    elif args.task == 'abl_s':
+        all_subsequence = [2]
+        # for clsutering 
+        c_resutls = []
+        p_results = []
+        s_results = []
+        for c in all_subsequence:
+            specs.subsequence_length = c
+            print(specs.subsequence_length)
+            acc_neu, acc_rules = main('UCR_binary', append_info=args.append_data_info, device = args.device)
+            print(acc_neu)
+            print(acc_rules)
+            c_resutls.append((acc_neu,acc_rules))
+            print(c_resutls)
+        with open('subsequence_results_ablation.md','a+') as f:
+            print(c_resutls, file=f)

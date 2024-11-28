@@ -26,9 +26,8 @@ The following demo indicates run the experiments:
    change the append_info = ['p1_n0'] (line 1225) for learning rules describe the positive class 1 and negative class 0. 
 
 
+4. When doing the ablation studies, please annotate the watched hyperparameter variable in seo
 
-
-   
 
 
 Appendix: 

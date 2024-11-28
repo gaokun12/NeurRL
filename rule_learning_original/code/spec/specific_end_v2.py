@@ -65,7 +65,7 @@ import scipy.sparse as sp
 
 
 global data 
-data = 'image'
+data = 'UCR'
 def main():
     global n_clusters, period_length, subsequence_length, stride, val_lambda, hidden_1_size, hidden_2_size, hidden_3_size, embedding_size, pretrain_epoch, finetuing_epoch, finetuing_epoch_outter, high_epoch, alphas, sub_epoch, finetuing_logic_epoch, learning_rate_dkm, learning_rate_ae, learning_rate_logic, pre_training, batch_size, ae_batch_size, image_row, image_column
     if data == 'demo':
@@ -98,14 +98,14 @@ def main():
         n_clusters = 4 # 5 Number of clusters to obtain
         period_length = 3 # 10
         # number_period = 100
-        subsequence_length = 2 #3
+        subsequence_length = 3 #3
         stride = 1
         val_lambda = 1
         hidden_1_size = 500
         hidden_2_size = 500
         hidden_3_size = 2000
-        embedding_size = 3 #n_clusters
-        pretrain_epoch = 50 # 50 ! train autoencoder first
+        embedding_size = 3 # n_clusters
+        pretrain_epoch = 0 # 50 ! train autoencoder first
         finetuing_epoch = 0
         finetuing_epoch_outter = 0 #! for train dkm epochs
         alphas = 1000
