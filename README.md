@@ -4,8 +4,8 @@ The following demo indicates run the experiments:
 1. Run on synthesis data
    py rule_learning_original/code/first_order_ts_end_to_end_v2.py -t d -d cuda:0
 
-   Change archive_name = 'demo_sin' (line 1018) for run on sine data 
-   Change archive_name = 'demo_threepatten' (line 1018) for run on triangle pluse data 
+   Change archive_name = 'demo_sin' (line 1018) for running on sine data 
+   Change archive_name = 'demo_threepatten' (line 1018) for running on triangle pluse data 
 
 2. Run on UCR data 
    py rule_learning_original/code/first_order_ts_end_to_end_v2.py -t b -d cuda:0
