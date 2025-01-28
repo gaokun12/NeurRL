@@ -15,6 +15,10 @@ The following instructions for learning rules from raw data:
    Some experiments from demo time series data:
    ![alt text](image.jpeg)
 
+   Explanation: The highlighted parts consist of multiple subsequences and each subsequence locates in a period. 
+
+
+
 2. Run on UCR time series data 
    py rule_learning_original/code/first_order_ts_end_to_end_v2.py -t b -d cuda:0
    
