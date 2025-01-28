@@ -13,7 +13,7 @@ The following instructions for learning rules from raw data:
    Change archive_name = 'demo_threepatten' (line 1018) for running on triangle pulse data 
 
    Some experiments from demo time series data:
-   ![alt text](image.png)
+   ![alt text](image.jpeg)
 
 2. Run on UCR time series data 
    py rule_learning_original/code/first_order_ts_end_to_end_v2.py -t b -d cuda:0
