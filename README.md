@@ -1,20 +1,20 @@
 # This code implements the learning rules from raw sequence datasets.
 
-The following demo indicates run the experiments: 
-1. Run on synthesis data
+The following instructions for learning rules from raw data: 
+1. Run on synthesis time series data
    py rule_learning_original/code/first_order_ts_end_to_end_v2.py -t d -d cuda:0
 
    Change archive_name = 'demo_sin' (line 1018) for running on sine data 
-   Change archive_name = 'demo_threepatten' (line 1018) for running on triangle pluse data 
+   Change archive_name = 'demo_threepatten' (line 1018) for running on triangle pulse data 
 
-2. Run on UCR data 
+2. Run on UCR time series data 
    py rule_learning_original/code/first_order_ts_end_to_end_v2.py -t b -d cuda:0
    
    change the focused_task = ['ECG200'] (line 1019) for run on ECG200 data
 
 3. Run on image data 
-   1. pre generating trainable data by run data.py
-   setting the positive and negative label as follows (line 17-20):
+   1. pre-generating trainable data by running 'data.py'
+   setting the positive and negative labels as follows (lines 17-20):
    positive_label = [1]
    negative_label = [0]
    first_name = 'p1_'
@@ -26,12 +26,14 @@ The following demo indicates run the experiments:
    change the append_info = ['p1_n0'] (line 1225) for learning rules describe the positive class 1 and negative class 0. 
 
 
-4. When doing the ablation studies, please annotate the watched hyperparameter variable in seo
+4. Please annotate the watched hyperparameter variable when doing the ablation studies.
 
 
 
 Appendix: 
-When missing the software, please download and refer the following version: 
+
+When missing the software, please download and refer to the following version: 
+
 Package                  Version
 ------------------------ -----------
 absl-py                  1.4.0
