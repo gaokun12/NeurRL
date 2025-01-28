@@ -1,5 +1,10 @@
 # This code implements the learning rules from raw sequence datasets.
 
+The manuscript written by Kun Gao, Katsumi Inoue, Yognzhi Cao, Hanpin Wang, Feng Yang and accepted by ICLR 2025 can be found here:
+https://openreview.net/pdf?id=zDjHOsSQxd
+
+
+
 The means of parameter:
 1. -t define the task. 'm' indicate running on UCR multi-variable data, 'b' indicate running on UCR binary variable data, 'd' indicate running on demo time series data, 'i' indicate running on image data, and 'abl_X' indicate running on ablation studies. Furthermore, 'abl_c' indicate the ablation studies on checking number of cluster parameter, 'abl_p' indicate the ablation studies on checking the number of period ,'abl_s' indicate the ablation studies on checking number of subsequence. 
 2. Generally, the length of subsequence is less than the length of period. 
