@@ -50,6 +50,8 @@ The following instructions for learning rules from raw data:
 Appendix: 
 
 When missing the software, please download and refer to the following version: 
+<details>
+  <summary>Click to expand the software version table</summary>
 
 | Package                  | Version       |
 |--------------------------|---------------|
@@ -201,3 +203,6 @@ When missing the software, please download and refer to the following version:
 | xgboost                  | 2.1.1         |
 | yarl                     | 1.9.4         |
 | zipp                     | 3.17.0        |
+
+
+</details>
