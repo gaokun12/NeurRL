@@ -12,7 +12,7 @@ The means of parameter:
 
 The following instructions for learning rules from raw data: 
 1. Run on synthesis time series data
-   py rule_learning_original/code/first_order_ts_end_to_end_v2.py -t d -d cuda:0
+   py rule_learning_original/code/main.py -t d -d cuda:0
 
    Change archive_name = 'demo_sin' (line 1018) for running on sine data 
    Change archive_name = 'demo_threepatten' (line 1018) for running on triangle pulse data 
@@ -25,7 +25,7 @@ The following instructions for learning rules from raw data:
 
 
 2. Run on UCR time series data 
-   py rule_learning_original/code/first_order_ts_end_to_end_v2.py -t b -d cuda:0
+   py rule_learning_original/code/main.py -t b -d cuda:0
    
    change the focused_task = ['ECG200'] (line 1019) for run on ECG200 data
 
@@ -38,7 +38,7 @@ The following instructions for learning rules from raw data:
    second_name = 'n0'
    py rule_learning_original/code/data.py
    2. run the learning rules
-   py rule_learning_original/code/first_order_ts_end_to_end_v2.py -t i -d cuda:0
+   py rule_learning_original/code/main.py -t i -d cuda:0
 
    change the append_info = ['p1_n0'] (line 1225) for learning rules describe the positive class 1 and negative class 0. 
 
