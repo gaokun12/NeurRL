@@ -105,7 +105,7 @@ class RuleLayer(nn.Module):
     
     def connective_loss(self):
         # no connective loss for the rule layer on time series data 
-        return 0 
+        return 0  
     
     def interpret(self, x_train:pd.DataFrame, precision = 100):
         '''
