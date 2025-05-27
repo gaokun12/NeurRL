@@ -55,6 +55,7 @@ When missing the software, please download and refer to the following version:
 
 | Package                  | Version       |
 |--------------------------|---------------|
+| python                   | 3.8.19         |
 | absl-py                  | 1.4.0         |
 | aiohttp                  | 3.9.5         |
 | aiosignal                | 1.3.1         |
