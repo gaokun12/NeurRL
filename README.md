@@ -47,6 +47,7 @@ The following instructions for learning rules from raw data:
 
 
 Please cite with this:
+```bibtex
 @inproceedings{NeurRL,
   author       = {Kun Gao and
                   Katsumi Inoue and
@@ -59,6 +60,8 @@ Please cite with this:
   year         = {2025},
   url          = {https://openreview.net/forum?id=zDjHOsSQxd},
 }
+```
+
 
 Appendix: 
 
