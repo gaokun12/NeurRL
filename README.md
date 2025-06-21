@@ -46,6 +46,19 @@ The following instructions for learning rules from raw data:
 4. Please annotate the watched hyperparameter variable when doing the ablation studies.
 
 
+Please cite with this:
+@inproceedings{NeurRL,
+  author       = {Kun Gao and
+                  Katsumi Inoue and
+                  Yongzhi Cao and
+                  Hanpin Wang and
+                  Yang Feng},
+  title        = {Differentiable Rule Induction from Raw Sequence Inputs},
+  booktitle    = {The Thirteenth International Conference on Learning Representations,
+                  {ICLR} 2025, Singapore, April 24-28, 2025},
+  year         = {2025},
+  url          = {https://openreview.net/forum?id=zDjHOsSQxd},
+}
 
 Appendix: 
 
