@@ -3,7 +3,6 @@ MNIST/data/MNIST/raw/t10k-images-idx3-ubyte
 MNIST/data/MNIST/raw/t10k-images-idx3-ubyte.gz
 *-ubyte
 *.gz
-*.png 
 *.pkl 
 demo/2024-11-25 09:12:53.063729/events.out.tfevents.1732497173.IHP-SPD-E1M133.3066201.2
 events*
@@ -11,5 +10,3 @@ rule_learning_original/model/best_cg_model_2024-11-25 10:13:02.095869.pt
 best_cg_model*
 best_logic_model*
 *.pyc
-*.pdf
-
